@@ -23,4 +23,13 @@ public class BlogService {
 		
 	}
 
+	public void update(BlogVo vo) {
+		blogRepository.update(vo);
+	}
+
+	public BlogVo getContent(String id) {
+		return blogRepository.findByID(id);
+		
+	}
+
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.poscoict.jblog.service.BlogService;
 import com.poscoict.jblog.service.CategoryService;
@@ -44,7 +45,21 @@ public class BlogController {
 	}
 	
 	@RequestMapping("/{id}/admin/basic")
-	public String basic(@PathVariable("id") String id,HttpServletRequest request){
+	public String basic(@PathVariable("id") String id,HttpServletRequest request, Model model){
+		String logId = null;
+		HttpSession session = request.getSession();
+		UserVo vo = (UserVo) session.getAttribute("user");
+		logId = vo.getId();
+		if ((!id.equals(logId)) || logId == null) {
+			return "redirect:/jblog/"+id;
+		}
+		BlogVo BVo = blogService.getContent(id);
+		model.addAttribute("blogVo", BVo);
+		return "blog/blog-admin-basic";
+	}
+	
+	@RequestMapping(value = "/{id}/admin/basic", method = RequestMethod.POST)
+	public String basic(@PathVariable("id") String id,HttpServletRequest request, BlogVo vo){
 		String logId = null;
 		HttpSession session = request.getSession();
 		logId = ((UserVo) session.getAttribute("user")).getId();
@@ -53,6 +68,8 @@ public class BlogController {
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/"+id;
 		}
+		
+		blogService.update(vo);
 		return "blog/blog-admin-basic";
 	}
 	
