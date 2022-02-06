@@ -3,16 +3,25 @@
 
 <mapper namespace="category">
 
-		<insert id="create" parameterType="blogvo">
+	<insert id="create" parameterType="blogvo">
 		<![CDATA[
 		insert 
 		   into category
 		values (null, '처음','asdfadsfads' ,#{id })
 		]]>
 	</insert>
-	<select id="select" parameterType="string" resultType="categoryvo">
+	<select id="select" parameterType="string"
+		resultType="categoryvo">
 		<![CDATA[
 		select * from category where blog_id= #{id}
 		]]>
-		</select>
+	</select>
+
+	<insert id="insert" parameterType="map">
+		<![CDATA[
+		insert 
+		   into category
+		values (null, #{vo.name},#{vo.description} ,#{i })
+		]]>
+	</insert>
 </mapper>

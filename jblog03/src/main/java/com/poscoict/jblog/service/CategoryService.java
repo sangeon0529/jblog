@@ -23,5 +23,11 @@ public class CategoryService {
 	public List<CategoryVo> getContents(String id) {
 		return categoryRepository.findByID(id);
 	}
+
+	public boolean insert(CategoryVo vo, String id) {
+		System.out.println(vo);
+		return categoryRepository.insert(vo, id);
+		
+	}
 	
 }

@@ -17,4 +17,9 @@ public class PostRepository {
 		return sqlSession.selectList("post.select", i);
 	}
 
+	public boolean write(PostVo vo) {
+	
+		return sqlSession.insert("post.write", vo)==1;
+	}
+
 }

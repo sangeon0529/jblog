@@ -19,4 +19,10 @@ public class PostService {
 		return postRepository.findByID(i);
 	}
 
+	public boolean write(PostVo vo) {
+		return postRepository.write(vo);
+		// TODO Auto-generated method stub
+		
+	}
+
 }

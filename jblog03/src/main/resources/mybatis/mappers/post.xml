@@ -9,4 +9,12 @@
 		select * from post where category_no = #{i}
 		]]>
 		</select>
+		
+		<insert id="write" parameterType="postvo">
+		<![CDATA[
+		insert 
+		   into post
+		values (null, #{title }, #{contents }, now(), #{category_no})
+		]]>
+		</insert>
 </mapper>

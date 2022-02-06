@@ -74,7 +74,7 @@ public class BlogController {
 	}
 	
 	@RequestMapping("/{id}/admin/category")
-	public String category(@PathVariable("id") String id,HttpServletRequest request){
+	public String category(@PathVariable("id") String id,HttpServletRequest request, Model model){
 		String logId = null;
 		HttpSession session = request.getSession();
 		logId = ((UserVo) session.getAttribute("user")).getId();
@@ -83,12 +83,27 @@ public class BlogController {
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/"+id;
 		}
+		List<CategoryVo> list = categoryService.getContents(id);
+		model.addAttribute("list",list);
 		return "blog/blog-admin-category";
-		
+	}
+	
+	@RequestMapping(value = "/{id}/admin/category", method = RequestMethod.POST)
+	public String category(@PathVariable("id") String id,HttpServletRequest request,CategoryVo vo){
+		String logId = null;
+		HttpSession session = request.getSession();
+		logId = ((UserVo) session.getAttribute("user")).getId();
+		System.out.println(id);
+		System.out.println(logId);
+		if ((!id.equals(logId)) || logId == null) {
+			return "redirect:/jblog/"+id;
+		}
+		categoryService.insert(vo, id);
+		return "redirect:/jblog/"+id;
 	}
 	
 	@RequestMapping("/{id}/admin/write")
-	public String write(@PathVariable("id") String id,HttpServletRequest request){
+	public String write(@PathVariable("id") String id,HttpServletRequest request,  Model model){
 		String logId = null;
 		HttpSession session = request.getSession();
 		logId = ((UserVo) session.getAttribute("user")).getId();
@@ -97,7 +112,28 @@ public class BlogController {
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/"+id;
 		}
+		List<CategoryVo> list = categoryService.getContents(id);
+		model.addAttribute("list",list);
+
+		
 		return "blog/blog-admin-write";
+		
+	}
+	
+	@RequestMapping(value="/{id}/admin/write",method = RequestMethod.POST)
+	public String write(@PathVariable("id") String id,HttpServletRequest request
+			,PostVo vo){
+		String logId = null;
+		HttpSession session = request.getSession();
+		logId = ((UserVo) session.getAttribute("user")).getId();
+		System.out.println(id);
+		System.out.println(logId);
+		if ((!id.equals(logId)) || logId == null) {
+			return "redirect:/jblog/"+id;
+		}
+		System.out.println(vo);
+		postService.write(vo);
+		return "redirect:/jblog/"+id;
 		
 	}
 }
