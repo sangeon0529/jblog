@@ -33,4 +33,9 @@ public class CategoryRepository {
 		return sqlSession.insert("category.insert",map) == 1;
 	}
 
+	public boolean delete(Long no) {
+		
+		return sqlSession.delete("category.delete",no)==1;
+	}
+
 }

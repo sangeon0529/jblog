@@ -19,7 +19,7 @@
 					<li><a href="${pageContext.request.contextPath }/jblog/${id}/admin/category">카테고리</a></li>
 					<li><a href="${pageContext.request.contextPath }/jblog/${id}/admin/write">글작성</a></li>
 				</ul>
-				<form action="${pageContext.request.contextPath }/jblog/${id}/admin/basic" method="post">
+				<form action="${pageContext.request.contextPath }/jblog/${id}/admin/basic" method="post" enctype="multipart/form-data">
 	 		      	<input type="hidden" name = "user_id" value = ${id }>
 	 		      	<table class="admin-config">
 			      		<tr>

@@ -33,12 +33,17 @@
 					</tr>
 					<c:forEach items="${list }" var="vo" varStatus="status">
 						<tr>
-						<td>${vo.no }</td>
-						<td>${vo.name }</td>
-						<td>30</td>
-						<td>${vo.description }</td>
-						<td><img
-							src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+							<td>${vo.no }</td>
+							<td>${vo.name }</td>
+							<td>${vo.count }</td>
+							<td>${vo.description }</td>
+							<c:choose>
+								<c:when test="${vo.count == 0}">
+									<td><a href="${pageContext.request.contextPath}/jblog/${id}/admin/delete/${vo.no}"> <img
+											src="${pageContext.request.contextPath}/assets/images/delete.jpg"></a></td>
+									
+								</c:when>
+							</c:choose>
 						</tr>
 						<!-- <option>자바</option> -->
 					</c:forEach>

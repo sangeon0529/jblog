@@ -25,9 +25,12 @@ public class CategoryService {
 	}
 
 	public boolean insert(CategoryVo vo, String id) {
-		System.out.println(vo);
 		return categoryRepository.insert(vo, id);
 		
+	}
+
+	public boolean deleteCategory(Long no) {
+		return categoryRepository.delete(no);
 	}
 	
 }

@@ -25,4 +25,8 @@ public class PostService {
 		
 	}
 
+	public PostVo getContent(Long postNo) {
+		return postRepository.findByNo(postNo);
+	}
+
 }

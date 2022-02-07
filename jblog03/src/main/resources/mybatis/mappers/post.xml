@@ -17,4 +17,10 @@
 		values (null, #{title }, #{contents }, now(), #{category_no})
 		]]>
 		</insert>
+		
+		<select id="find" parameterType="long" resultType="postvo">
+		<![CDATA[
+		select * from post where no = #{postNo}
+		]]>
+		</select>
 </mapper>

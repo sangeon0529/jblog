@@ -22,4 +22,9 @@ public class PostRepository {
 		return sqlSession.insert("post.write", vo)==1;
 	}
 
+	public PostVo findByNo(Long postNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("post.find",postNo);
+	}
+
 }

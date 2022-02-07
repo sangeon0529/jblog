@@ -19,7 +19,7 @@
 		
 		<update id="update" parameterType="blogvo">
 		<![CDATA[
-		update blog set title = #{title} where user_id = #{user_id}
+		update blog set title = #{title}, logo = #{logo} where user_id = #{user_id}
 		]]>
 		</update>
 </mapper>

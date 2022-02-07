@@ -5,7 +5,7 @@ public class CategoryVo {
 	private String name;
 	private String description;
 	private String blog_id;
-
+	private Long count;
 	public Long getNo() {
 		return no;
 	}
@@ -31,6 +31,13 @@ public class CategoryVo {
 	}
 	public String getBlog_id() {
 		return blog_id;
+	}
+	
+	public Long getCount() {
+		return count;
+	}
+	public void setCount(Long count) {
+		this.count = count;
 	}
 	public void setBlog_id(String blog_id) {
 		this.blog_id = blog_id;
