@@ -37,20 +37,18 @@ public class BlogController {
 	@Autowired
 	private FileUploadService fileUploadService;
 
-	@RequestMapping({"", "/{pathNo1}", "/{pathNo1}/{pathNo2}"})
-	public String main(@PathVariable("id") String id, 
-			@PathVariable("pathNo1") Optional<Long> pathNo1,
-			@PathVariable("pathNo2") Optional<Long> pathNo2,
-			Model model) {
+	@RequestMapping({ "", "/{pathNo1}", "/{pathNo1}/{pathNo2}" })
+	public String main(@PathVariable("id") String id, @PathVariable("pathNo1") Optional<Long> pathNo1,
+			@PathVariable("pathNo2") Optional<Long> pathNo2, Model model) {
 		BlogVo blogVo = blogService.getContents(id);
 		List<CategoryVo> list = categoryService.getContents(id);
 		Long categoryNo = list.get(0).getNo();
 		Long postNo = 0L;
-		
-		if(pathNo2.isPresent()) {
+
+		if (pathNo2.isPresent()) {
 			categoryNo = pathNo1.get();
 			postNo = pathNo2.get();
-		} else if(pathNo1.isPresent()) {
+		} else if (pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
 		}
 		List<PostVo> postlist = postService.getContents(categoryNo);
@@ -68,7 +66,12 @@ public class BlogController {
 		String logId = null;
 		HttpSession session = request.getSession();
 		UserVo vo = (UserVo) session.getAttribute("user");
-		logId = vo.getId();
+		try {
+			logId = vo.getId();
+		} catch (Exception e) {
+
+		}
+
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/" + id;
 		}
@@ -78,16 +81,18 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/admin/basic", method = RequestMethod.POST)
-	public String basic(@PathVariable("id") String id,HttpServletRequest request, BlogVo vo,
-			@RequestParam(value="logo-file") MultipartFile multipartFile){
-		
+	public String basic(@PathVariable("id") String id, HttpServletRequest request, BlogVo vo,
+			@RequestParam(value = "logo-file") MultipartFile multipartFile) {
+
 		String logId = null;
 		HttpSession session = request.getSession();
-		logId = ((UserVo) session.getAttribute("user")).getId();
-		System.out.println(id);
-		System.out.println(logId);
+		try {
+			logId = ((UserVo) session.getAttribute("user")).getId();
+		} catch (Exception e) {
+
+		}
 		if ((!id.equals(logId)) || logId == null) {
-			return "redirect:/jblog/"+id;
+			return "redirect:/jblog/" + id;
 		}
 		String url = fileUploadService.restore(multipartFile);
 		vo.setLogo(url);
@@ -99,7 +104,11 @@ public class BlogController {
 	public String category(@PathVariable("id") String id, HttpServletRequest request, Model model) {
 		String logId = null;
 		HttpSession session = request.getSession();
-		logId = ((UserVo) session.getAttribute("user")).getId();
+		try {
+			logId = ((UserVo) session.getAttribute("user")).getId();
+		} catch (Exception e) {
+
+		}
 		System.out.println(id);
 		System.out.println(logId);
 		if ((!id.equals(logId)) || logId == null) {
@@ -114,9 +123,11 @@ public class BlogController {
 	public String category(@PathVariable("id") String id, HttpServletRequest request, CategoryVo vo) {
 		String logId = null;
 		HttpSession session = request.getSession();
-		logId = ((UserVo) session.getAttribute("user")).getId();
-		System.out.println(id);
-		System.out.println(logId);
+		try {
+			logId = ((UserVo) session.getAttribute("user")).getId();
+		} catch (Exception e) {
+
+		}
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/" + id;
 		}
@@ -128,9 +139,11 @@ public class BlogController {
 	public String write(@PathVariable("id") String id, HttpServletRequest request, Model model) {
 		String logId = null;
 		HttpSession session = request.getSession();
-		logId = ((UserVo) session.getAttribute("user")).getId();
-		System.out.println(id);
-		System.out.println(logId);
+		try {
+			logId = ((UserVo) session.getAttribute("user")).getId();
+		} catch (Exception e) {
+
+		}
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/" + id;
 		}
@@ -145,9 +158,11 @@ public class BlogController {
 	public String write(@PathVariable("id") String id, HttpServletRequest request, PostVo vo) {
 		String logId = null;
 		HttpSession session = request.getSession();
-		logId = ((UserVo) session.getAttribute("user")).getId();
-		System.out.println(id);
-		System.out.println(logId);
+		try {
+			logId = ((UserVo) session.getAttribute("user")).getId();
+		} catch (Exception e) {
+
+		}
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/" + id;
 		}
@@ -162,9 +177,11 @@ public class BlogController {
 			Model model) {
 		String logId = null;
 		HttpSession session = request.getSession();
-		logId = ((UserVo) session.getAttribute("user")).getId();
-		System.out.println(id);
-		System.out.println(logId);
+		try {
+			logId = ((UserVo) session.getAttribute("user")).getId();
+		} catch (Exception e) {
+
+		}
 		if ((!id.equals(logId)) || logId == null) {
 			return "redirect:/jblog/" + id;
 		}
