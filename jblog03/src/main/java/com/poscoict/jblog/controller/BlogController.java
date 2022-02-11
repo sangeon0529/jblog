@@ -51,6 +51,7 @@ public class BlogController {
 		} else if (pathNo1.isPresent()) {
 			categoryNo = pathNo1.get();
 		}
+		System.out.println(pathNo1.getClass());
 		List<PostVo> postlist = postService.getContents(categoryNo);
 		PostVo postvo = postService.getContent(postNo);
 		model.addAttribute("postvo", postvo);
