@@ -61,7 +61,7 @@ public class BlogController {
 		return "blog/blog-main";
 	}
 
-	@RequestMapping("/admin/basic")
+	@RequestMapping({"/admin/basic","/admin"})
 	public String basic(@PathVariable("id") String id, HttpServletRequest request, Model model) {
 		String logId = null;
 		HttpSession session = request.getSession();
